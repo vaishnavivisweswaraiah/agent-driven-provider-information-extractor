@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime
 
-from langgraph.prebuilt import create_react_agent
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import ToolMessage, SystemMessage
 
@@ -64,13 +64,13 @@ CONTENT:
 
 def _invoke_agent(provider_name: str) -> str:
     """Run the ReAct agent and return combined raw content from all tool calls."""
-    agent = create_react_agent(
+    agent = create_agent(
         model  = ChatOpenAI(
             model="gpt-4o",
             temperature=0,
-            openai_api_key=os.getenv("OPENAI_API_KEY")),
+            api_key=os.getenv("OPENAI_API_KEY")),
         tools  = [scrape_websites, search_web_ddgs, search_web_llm, get_npi_data],
-        prompt = SystemMessage(content=_AGENT_SYSTEM_PROMPT),
+        system_prompt= SystemMessage(content=_AGENT_SYSTEM_PROMPT),
     )
 
     result = agent.invoke(
