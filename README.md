@@ -4,7 +4,7 @@ about healthcare providers from publicly available online sources.
 
 ---
 ## Project Overview
-This system uses a LangGraph ReAct agent to orchestrate multiple data collection
+This system uses a agent to orchestrate multiple data collection
 tools and extract structured information about healthcare providers including
 facility details, practitioners, NPI numbers, insurance, ratings, and affiliations.
 
@@ -19,7 +19,7 @@ facility details, practitioners, NPI numbers, insurance, ratings, and affiliatio
 │                            │                                │
 │                  ┌─────────▼─────────┐                      │
 │                  │     agent.py      │                      │
-│                  │  ReAct Agent      │                      │
+│                  │     Agent         │                      │
 │                  │   (GPT-4o)        │                      │
 │                  └──┬───┬───┬───┬────┘                      │
 │                     │   │   │   │                           │
@@ -65,8 +65,8 @@ A fixed pipeline always runs every step regardless of what data was already
 collected. If scraping returns complete data, a pipeline would still call
 DuckDuckGo and LLM search unnecessarily — wasting time and cost.
 
-### ReAct Agent Advantages
-The LangGraph ReAct agent evaluates results after each tool call and decides
+### Agent Advantages
+The agent evaluates results after each tool call and decides
 what to do next based on what is still missing:
 
 - If scraping returns full data → skips search tools entirely
@@ -110,7 +110,7 @@ what to do next based on what is still missing:
 
 | Component             | Technology                               |
 |-----------------------|------------------------------------------|
-| Agent orchestration   | LangGraph ReAct + GPT-4o                 |
+| Agent orchestration   | Langchain Agent + GPT-4o                 |
 | Web scraping          | requests + BeautifulSoup                 |
 | Targeted search       | DuckDuckGo (duckduckgo-search)           |
 | LLM web search        | OpenAI Responses API (fallback only)     |
@@ -124,7 +124,7 @@ what to do next based on what is still missing:
 
 ## Project Structure
 ```
-├── agent.py            # Main entrypoint — ReAct agent + extraction
+├── agent.py            # Main entrypoint —  agent + extraction
 ├── tools.py            # LangChain tools (scrape, search, NPI)
 ├── utils.py            # Web fetching, NPPES, LLM parse, CSV/PDF export
 ├── data_models.py      # Pydantic models (HealthcareProvider, Practitioner)

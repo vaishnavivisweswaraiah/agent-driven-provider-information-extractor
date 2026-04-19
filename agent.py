@@ -63,7 +63,7 @@ CONTENT:
 {context}"""
 
 def _invoke_agent(provider_name: str) -> str:
-    """Run the ReAct agent and return combined raw content from all tool calls."""
+    """Run the agent and return combined raw content from all tool calls."""
     agent = create_agent(
         model  = ChatOpenAI(
             model="gpt-4o",
