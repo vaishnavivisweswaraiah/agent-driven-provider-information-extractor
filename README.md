@@ -10,7 +10,9 @@ facility details, practitioners, NPI numbers, insurance, ratings, and affiliatio
 
 ---
 ## Architecture
-──────────────────────────────────────────────────────────────┐
+
+```
+┌─────────────────────────────────────────────────────────────┐
 │                    app.py (Streamlit UI)                    │
 │                            │                                │
 │                  get_provider(name)                         │
@@ -35,22 +37,24 @@ facility details, practitioners, NPI numbers, insurance, ratings, and affiliatio
 │                            │                                │
 │                  storage/providers.json                     │
 └─────────────────────────────────────────────────────────────┘
-
+```
 ---
 
 ## Data Flow
 
+```
 scrape_websites   → fetches provider website pages (BeautifulSoup)
-↓
+        ↓
 search_web_ddgs   → fills gaps: ratings, insurance, affiliations (free)
-↓ (only if scraping fails entirely)
+        ↓ (only if scraping fails entirely)
 search_web_llm    → full LLM web search (last resort, costs $)
-↓
+        ↓
 get_npi_data      → extracts practitioner names → queries NPPES API
-↓
+        ↓
 _llm_parse        → GPT-4o structured extraction → HealthcareProvider
-↓
+        ↓
 save_provider     → cached to storage/providers.json
+```
 
 ---
 
@@ -95,7 +99,7 @@ _llm_parse      — one call per provider for final extraction
 - Certifications (from NPPES secondary taxonomies)
 - Contact details and availability
 
-### Bonus Fields
+### Additonal Fields
 - Accepted insurance plans
 - Patient ratings or review summary
 - Hospital or network affiliations
@@ -119,7 +123,7 @@ _llm_parse      — one call per provider for final extraction
 ---
 
 ## Project Structure
-
+```
 ├── agent.py            # Main entrypoint — ReAct agent + extraction
 ├── tools.py            # LangChain tools (scrape, search, NPI)
 ├── utils.py            # Web fetching, NPPES, LLM parse, CSV/PDF export
@@ -131,8 +135,8 @@ _llm_parse      — one call per provider for final extraction
 ├── storage/
 │   └── providers.json  # Auto-created on first extraction
 ├── requirements.txt
-└── .env                # OPENAI_API_KEY 
-
+└── .env                # OPENAI_API_KEY (not commited to git)
+```
 ---
 
 ## Setup
@@ -161,23 +165,6 @@ python agent.py
 # 6. Run Streamlit UI
 streamlit run app.py
 ```
-
----
-
-## Requirements
-langchain
-langchain-openai
-langgraph
-openai
-pydantic
-beautifulsoup4
-requests
-duckduckgo-search
-python-dotenv
-streamlit
-fpdf
-
-
 ---
 
 ## Storage Design & Assumptions
