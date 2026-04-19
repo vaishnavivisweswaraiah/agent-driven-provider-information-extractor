@@ -155,8 +155,7 @@ hipe\Scripts\activate           # Windows
 pip install -r requirements.txt
 
 # 4. Configure environment
-cp .env.example .env
-# Edit .env and add your OpenAI API key:
+# create .env and add your OpenAI API key:
 # OPENAI_API_KEY=sk-...
 
 # 5. Run agent directly (terminal testing)
