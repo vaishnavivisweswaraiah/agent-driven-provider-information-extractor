@@ -75,11 +75,11 @@ what to do next based on what is still missing:
 - Always calls NPI lookup last with complete accumulated content
 
 ### Cost Control Strategy
-
-Free:  scrape_websites + search_web_ddgs + NPPES API
-Paid:  search_web_llm  — only when scraping fails completely
-_llm_parse      — one call per provider for final extraction
-
+```
+- Free:  scrape_websites + search_web_ddgs + NPPES API
+- Paid:  search_web_llm  — only when scraping fails completely
+- Paid: llm/agent (Open AI API)
+```
 ---
 
 ## Information Extracted
@@ -187,7 +187,7 @@ Provider data is stored locally in `storage/providers.json`:
   for this project scope of 2-3 providers
 - The storage interface (`save_provider`, `load_provider`, `exists`) is
   intentionally simple and swappable — replace `storage.py` to use
-  PostgreSQL, MongoDB, or Redis without changing `agent.py` or `app.py`
+  Other storage options without changing `agent.py` or `app.py`
 - `force_refresh=True` bypasses cache and re-extracts at any time
 - `storage/providers.json` is auto-created on first extraction
 
