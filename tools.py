@@ -2,7 +2,6 @@
 
 import os
 import json
-import asyncio
 import logging as log
 from dotenv import load_dotenv
 
@@ -36,8 +35,7 @@ def scrape_websites(provider_name: str) -> str:
         - Provider details (address, phone, hours, website)
         - Practitioner names, specialties and other relevant information
         - Services offered, Accepted Insurances, ratings, Affliations
-        Returns empty string if website is unreachable (404/timeout) — 
-        if empty, fall back to search_web_llm.
+        - Returns empty string if website is unreachable (404/timeout).If empty, fall back to search_web_llm.
 
     """
     log.info(f"[scrape] fetching pages for '{provider_name}'")
@@ -88,9 +86,8 @@ def search_web_llm(provider_name: str) -> str:
 def search_web_ddgs(provider_name: str, max_results: int = 5) -> str:
     """
     DuckDuckGo search for a healthcare provider's to supplements website data with external ratings, reviews, and insurance info
-    that provider websites typically do not list themselves but not together with llm_search
+    that provider websites typically do not list themselves. Donot use this tool together with llm_search
     
-
     INPUT:
         provider_name: exact provider name (e.g. 'Soin Medical Center')
 

@@ -204,6 +204,7 @@ def _clean(text) -> str:
     for char, replacement in replacements.items():
         text = text.replace(char, replacement)
     return text.encode("latin-1", "replace").decode("latin-1")
+
 def _pdf_section_title(pdf: FPDF, title: str):
     pdf.set_font("Arial", "B", 12)
     pdf.set_fill_color(230, 240, 250)

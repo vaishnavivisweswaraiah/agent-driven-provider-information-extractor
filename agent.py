@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=ResourceWarning)
 
 _AGENT_SYSTEM_PROMPT ="""You are a Healthcare Provider Information expert and also data collection assistant.
-Analyse and reason that tha  colleted data could extract complete information for ALL fields.:
+Analyse and reason that the  collected data could extract complete information for ALL fields.:
 provider name, facility type, address, contact, hours, website, accepted insurance, ratings, affiliations.
 practitioners with NPI numbers, qualification, certification, office hours or appointment only """
 
@@ -35,7 +35,7 @@ _EXTRACTION_SYSTEM_PROMPT = (
     "Only use what is explicitly present — never invent data."
 )
 
-_EXTRACTION_USER_PROMPT = """Extract all available structured information from the content below.
+_EXTRACTION_USER_PROMPT = """Extract all available structured information from the provided context.
 
 Provider fields:
   - Full name of the healthcare provider or organization
@@ -53,9 +53,9 @@ For each practitioner:
   - Full name without any titles or suffixes appended
   - Specialty from NPPES taxonomies where primary=true, use 'desc'
   - NPI number from NPPES 'number' field
-  - Qualification (e.g. MD, DO, NP) and Certifications of the practioner
+  - Qualification (e.g. MD, DO, NP) and Certifications of the practitioner
   - Contact details if available
-  - Office hours or appointment availability
+  - Office hours or appointment availability (look for explict hours or schedule appointment options)
 
 Replace all missing or null values with 'Not available'
 
