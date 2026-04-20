@@ -4,8 +4,8 @@ about healthcare providers from publicly available online sources.
 
 ---
 ## Project Overview
-This system uses a agent to orchestrate multiple data collection
-tools and extract structured information about healthcare providers including
+This system uses an agent to orchestrate multiple data collection
+tools and extract structured information about healthcare providers, including
 facility details, practitioners, NPI numbers, insurance, ratings, and affiliations.
 
 ---
@@ -241,7 +241,7 @@ sufficient snippet data for these targeted fields. It is not used as a full
 scraping fallback because snippets are too short to recover complete provider
 details.
 
-### Why LLM web search only as last resort?
+### Why is LLM web search only a last resort?
 LLM web search costs money per call. It is only necessary when scraping fails
 entirely. DuckDuckGo handles targeted gap-filling for free. This design
 minimizes API cost while maintaining resilience.
@@ -254,7 +254,7 @@ taxonomy classifications directly from the source.
 ### Why local JSON cache?
 For a 2-3 provider scope, a database adds unnecessary complexity. The JSON
 file is human-readable and portable. The storage interface is designed to be
-swappable without touching any other file.
+swappable without touching any other files.
 
 ---
 
@@ -266,5 +266,5 @@ swappable without touching any other file.
 | NPI name matching can miss name variants | Fuzzy matching with confidence scoring |
 | No cache — stale data needs manual refresh | Add scheduled re-extraction |
 | DuckDuckGo has undocumented rate limits | Add retry logic |
-| Local JSON storage | Swap `storage.py` for other datases |
+| Local JSON storage | Swap `storage.py` for other databases |
 | Single-user Streamlit app | Multi-user support with session isolation |
