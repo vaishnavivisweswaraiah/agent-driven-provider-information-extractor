@@ -9,6 +9,15 @@ tools and extract structured information about healthcare providers including
 facility details, practitioners, NPI numbers, insurance, ratings, and affiliations.
 
 ---
+## Demo
+
+▶ [Watch Demo](https://youtu.be/Mxe8u6gMhEQ)
+
+A short walkthrough covering:
+- The problem with manual healthcare provider research
+- How the AI agent solves it
+- Live app demo — selecting a provider, extracting a full profile, and exporting results
+---
 ## Architecture
 
 ```
