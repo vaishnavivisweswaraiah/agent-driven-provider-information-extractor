@@ -87,8 +87,9 @@ def search_web_llm(provider_name: str) -> str:
 @tool
 def search_web_ddgs(provider_name: str, max_results: int = 5) -> str:
     """
-    DuckDuckGo search for a healthcare provider's ratings, reviews,
-    accepted insurance plans, and hospital or network affiliations but not together with llm_search
+    DuckDuckGo search for a healthcare provider's to supplements website data with external ratings, reviews, and insurance info
+    that provider websites typically do not list themselves but not together with llm_search
+    
 
     INPUT:
         provider_name: exact provider name (e.g. 'Soin Medical Center')

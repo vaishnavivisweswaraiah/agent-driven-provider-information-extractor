@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=ResourceWarning)
 
 _AGENT_SYSTEM_PROMPT ="""You are a Healthcare Provider Information expert and also data collection assistant.
-Collect complete information for ALL fields:
+Analyse and reason that tha  colleted data could extract complete information for ALL fields.:
 provider name, facility type, address, contact, hours, website, accepted insurance, ratings, affiliations.
 practitioners with NPI numbers, qualification, certification, office hours or appointment only """
 
@@ -71,11 +71,13 @@ def _invoke_agent(provider_name: str) -> str:
             api_key=os.getenv("OPENAI_API_KEY")),
         tools  = [scrape_websites, search_web_ddgs, search_web_llm, get_npi_data],
         system_prompt= SystemMessage(content=_AGENT_SYSTEM_PROMPT),
+        debug=False
     )
 
-    result = agent.invoke(
-    {"messages": [("user", f"Collect all information about '{provider_name}'.")]},
-    config={"recursion_limit": 25,"callbacks": [], "verbose": True})
+    result = agent.invoke({
+        "messages": [("user", f"Collect all information about '{provider_name}'.")]
+    })
+   
 
     # Separate scraped content from NPPES data
     collected  = []
